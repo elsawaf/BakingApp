@@ -56,6 +56,11 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
         intent.putExtra(Constants.KEY_RECIPE_ID, recipeId);
         views.setRemoteAdapter(R.id.listViewWidget, intent);
 
+        Intent chooseRecipeIntent = new Intent(context, ChooseRecipeActivity.class);
+        PendingIntent recipePendingIntent = PendingIntent.getActivity(context,
+                0, chooseRecipeIntent, 0);
+        views.setOnClickPendingIntent(R.id.btnChangeRecipe, recipePendingIntent);
+
         views.setEmptyView(R.id.listViewWidget, R.id.tvEmptyView);
         Log.d(TAG, "getIngredientListRemoteView: ");
         return views;

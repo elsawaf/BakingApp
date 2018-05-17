@@ -39,7 +39,8 @@
                 android:resource="@xml/ingredients_widget_info" />
         </receiver>
 
-        <activity android:name=".activities.ChooseRecipeActivity"></activity>
+        <activity android:name=".activities.ChooseRecipeActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
 
         <service android:name=".ListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>

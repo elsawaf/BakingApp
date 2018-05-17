@@ -3,4 +3,6 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="no_data_available">No Data Available</string>
+    <string name="title_show_the_recipe_details">Click to show the ingredients and steps</string>
+    <string name="title_add_to_widget">Click to add its ingredients to the widget</string>
 </resources>

@@ -6,7 +6,8 @@
     <ListView
         android:id="@+id/listViewWidget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
     <TextView
         android:id="@+id/tvEmptyView"
@@ -16,4 +17,10 @@
         android:textSize="25sp"
         />
 
+    <Button
+        android:id="@+id/btnChangeRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="Change the Recipe"/>
 </FrameLayout>

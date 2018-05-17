@@ -27,6 +27,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     private int callingActivity;
     private OnChooseRecipeListener mCallback;
 
+    /*This adapter is using to show Recipe List at the MainActivity
+    * and at the ChooseRecipeActivity which update the ingredient widget*/
+
     public RecipeAdapter(List<Recipe> recipeList, Context context, int callingActivity) {
         this.recipeList = recipeList;
         this.context = context;
@@ -46,6 +49,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe recipe = recipeList.get(position);
         holder.recipeNameTV.setText(recipe.getName());
+        if (callingActivity == MainActivity.CHOOSE_ACTIVITY) {
+            holder.recipeClickTV.setText(R.string.title_add_to_widget);
+        }
     }
 
     @Override
@@ -66,6 +72,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         @BindView(R.id.tvRecipeName)
         TextView recipeNameTV;
+        @BindView(R.id.tvRecipeClick)
+        TextView recipeClickTV;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);

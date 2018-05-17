@@ -12,10 +12,10 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/recipeClick"
+        android:id="@+id/tvRecipeClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click to show the ingredients and steps"
+        android:text="@string/title_show_the_recipe_details"
         style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/tvRecipeName"
