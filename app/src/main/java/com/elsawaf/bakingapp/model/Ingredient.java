@@ -4,8 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
-public class Ingredient implements Parcelable {
+public class Ingredient extends SugarRecord implements Parcelable {
 
     @SerializedName("ingredient")
     private String name;
@@ -24,6 +25,10 @@ public class Ingredient implements Parcelable {
         return quantity;
     }
 
+
+    public Ingredient() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -31,21 +36,18 @@ public class Ingredient implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.measure);
         dest.writeString(this.name);
+        dest.writeString(this.measure);
         dest.writeDouble(this.quantity);
     }
 
-    public Ingredient() {
-    }
-
     protected Ingredient(Parcel in) {
-        this.measure = in.readString();
         this.name = in.readString();
+        this.measure = in.readString();
         this.quantity = in.readDouble();
     }
 
-    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+    public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
         @Override
         public Ingredient createFromParcel(Parcel source) {
             return new Ingredient(source);
