@@ -1,7 +1,7 @@
 package com.elsawaf.bakingapp.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recipeRecyclerView;
 
     RecipeAdapter adapter;
+    List<Recipe> recipeList;
+
+    public static final int MAIN_ACTIVITY = 1;
+    public static final int CHOOSE_ACTIVITY = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +39,28 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        adapter = new RecipeAdapter(new ArrayList<>(), this);
+        addTheListToUI(MAIN_ACTIVITY);
+    }
+
+    protected void addTheListToUI(int whichActivity) {
+        adapter = new RecipeAdapter(new ArrayList<>(), this, whichActivity);
         recipeRecyclerView.setAdapter(adapter);
 
         recipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         recipeRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+        makeRecipesCall();
+    }
 
+    private void makeRecipesCall () {
         Call<List<Recipe>> call = RecipeWebservice.getRetrofitClient(this).getRecipes();
 
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 if (response != null) {
-                    adapter.setRecipeList(response.body());
-//                    Toast.makeText(MainActivity.this, response.body().get(0).getName(), Toast.LENGTH_SHORT).show();
+                    recipeList = response.body();
+                    adapter.setRecipeList(recipeList);
                 }
             }
 

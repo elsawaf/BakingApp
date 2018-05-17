@@ -22,7 +22,7 @@
         <activity android:name=".activities.RecipeMasterActivity" />
         <activity android:name=".activities.StepDetailsActivity" />
 
-        <receiver android:name=".IngredientsWidget">
+        <receiver android:name=".IngredientsWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -31,6 +31,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ingredients_widget_info" />
         </receiver>
+
+        <activity android:name=".activities.ChooseRecipeActivity"></activity>
     </application>
 
 </manifest>

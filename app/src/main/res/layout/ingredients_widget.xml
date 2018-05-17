@@ -4,16 +4,12 @@
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-    <ImageView
-        android:id="@+id/appwidget_icon"
+
+    <Button
+        android:id="@+id/btnAddRecipeAppWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="#09C"
-        android:contentDescription="@string/appwidget_text"
-        android:src="@mipmap/ic_launcher"
-        />
+        android:text="Add a Recipe"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elsawaf.bakingapp.R;
+import com.elsawaf.bakingapp.activities.MainActivity;
 import com.elsawaf.bakingapp.activities.RecipeMasterActivity;
 import com.elsawaf.bakingapp.model.Recipe;
 import com.elsawaf.bakingapp.network.Constants;
@@ -23,10 +24,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     private List<Recipe> recipeList;
     private Context context;
+    private int callingActivity;
+    private OnChooseRecipeListener mCallback;
 
-    public RecipeAdapter(List<Recipe> recipeList, Context context) {
+    public RecipeAdapter(List<Recipe> recipeList, Context context, int callingActivity) {
         this.recipeList = recipeList;
         this.context = context;
+        this.callingActivity = callingActivity;
     }
 
     @NonNull
@@ -54,6 +58,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         notifyDataSetChanged();
     }
 
+    public void setmCallback(OnChooseRecipeListener mCallback) {
+        this.mCallback = mCallback;
+    }
+
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tvRecipeName)
@@ -63,12 +71,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(context, RecipeMasterActivity.class);
-                intent.putExtra(Constants.KEY_RECIPE_DETAILS,
-                        recipeList.get(getAdapterPosition()));
-                context.startActivity(intent);
+                if (callingActivity == MainActivity.MAIN_ACTIVITY) {
+                    Intent intent = new Intent(context, RecipeMasterActivity.class);
+                    intent.putExtra(Constants.KEY_RECIPE_DETAILS,
+                            recipeList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+                else {
+                    mCallback.onRecipeChoice(getAdapterPosition());
+                }
             });
         }
+    }
+
+    public interface OnChooseRecipeListener{
+        void onRecipeChoice(int pos);
     }
 
 }
