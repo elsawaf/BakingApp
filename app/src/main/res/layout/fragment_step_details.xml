@@ -27,6 +27,10 @@
         android:padding="10dp"
         android:layout_below="@+id/playerView"/>
 
-
+    <ImageView
+        android:id="@+id/ivStepThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvStepDescription"/>
 
 </RelativeLayout>

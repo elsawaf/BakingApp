@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +41,8 @@ public class StepDetailsFragment extends Fragment {
     ImageView noVideoIV;
     @BindView(R.id.playerView)
     SimpleExoPlayerView mPlayerView;
+    @BindView(R.id.ivStepThumbnail)
+    ImageView stepThumbIV;
     private SimpleExoPlayer mExoPlayer;
 
     Step step;
@@ -72,7 +75,9 @@ public class StepDetailsFragment extends Fragment {
 
         stepDescriptionTV.setText(step.getDescription());
 
+        // if the step has video show it .. else show the default image
         String url = step.getVideoURL();
+        // no video Url
         if (TextUtils.isEmpty(url)) {
             mPlayerView.setVisibility(View.INVISIBLE);
             noVideoIV.setVisibility(View.VISIBLE);
@@ -82,6 +87,17 @@ public class StepDetailsFragment extends Fragment {
             initializePlayer(Uri.parse(url));
         }
 
+        String imageUrl = step.getThumbnailURL();
+        // if image path is empty then hide image view
+        if (TextUtils.isEmpty(imageUrl)){
+            stepThumbIV.setVisibility(View.GONE);
+        }
+        // else .. then show image or error image if not loaded
+        else {
+            Picasso.with(getContext()).load(imageUrl).fit().centerCrop()
+                    .error(R.drawable.image_not_available)
+                    .into(stepThumbIV);
+        }
     }
 
     private void initializePlayer(Uri mediaUri) {
