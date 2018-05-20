@@ -1,6 +1,7 @@
 package com.elsawaf.bakingapp.activities;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,8 +25,11 @@ public class RecipeMasterActivity extends AppCompatActivity implements StepsFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_master);
+        ActionBar actionBar = getSupportActionBar();
 
         recipe = getIntent().getParcelableExtra(Constants.KEY_RECIPE_DETAILS);
+
+        actionBar.setTitle(recipe.getName());
 
         IngredientsFragment ingredientsFragment = (IngredientsFragment) getSupportFragmentManager().findFragmentById(R.id.ingredientsFragment);
         ingredientsFragment.setIngredientArrayList((ArrayList<Ingredient>) recipe.getIngredientList());
