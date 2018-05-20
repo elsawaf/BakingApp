@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elsawaf.bakingapp.R;
@@ -14,6 +16,7 @@ import com.elsawaf.bakingapp.activities.MainActivity;
 import com.elsawaf.bakingapp.activities.RecipeMasterActivity;
 import com.elsawaf.bakingapp.model.Recipe;
 import com.elsawaf.bakingapp.network.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,6 +52,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe recipe = recipeList.get(position);
         holder.recipeNameTV.setText(recipe.getName());
+        String imageURL = recipe.getImage();
+        if (TextUtils.isEmpty(imageURL)) {
+            holder.recipeImageView.setVisibility(View.GONE);
+        }
+        else {
+            Picasso.with(context).load(imageURL).fit().centerCrop()
+                    .error(R.drawable.image_not_available)
+                    .into(holder.recipeImageView);
+        }
         if (callingActivity == MainActivity.CHOOSE_ACTIVITY) {
             holder.recipeClickTV.setText(R.string.title_add_to_widget);
         }
@@ -74,6 +86,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         TextView recipeNameTV;
         @BindView(R.id.tvRecipeClick)
         TextView recipeClickTV;
+        @BindView(R.id.ivRecipe)
+        ImageView recipeImageView;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);

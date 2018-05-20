@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivRecipe"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
 
     <TextView
         android:id="@+id/tvRecipeName"
+        style="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        style="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/app_name" />
 
     <TextView
         android:id="@+id/tvRecipeClick"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_show_the_recipe_details"
-        style="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/tvRecipeName"
-        android:padding="5dp"/>
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:text="@string/title_show_the_recipe_details"
+        android:layout_toRightOf="@+id/ivRecipe"/>
 
 </RelativeLayout>
