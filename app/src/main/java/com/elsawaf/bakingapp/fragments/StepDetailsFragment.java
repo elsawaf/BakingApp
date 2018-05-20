@@ -17,6 +17,7 @@ import com.elsawaf.bakingapp.model.Recipe;
 import com.elsawaf.bakingapp.model.Step;
 import com.elsawaf.bakingapp.network.Constants;
 import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -35,6 +36,7 @@ import butterknife.ButterKnife;
 
 public class StepDetailsFragment extends Fragment {
 
+    private static final String KEY_VIDEO_POSITION = "videoPos";
     @BindView(R.id.tvStepDescription)
     TextView stepDescriptionTV;
     @BindView(R.id.ivNoVideo)
@@ -97,6 +99,28 @@ public class StepDetailsFragment extends Fragment {
             Picasso.with(getContext()).load(imageUrl).fit().centerCrop()
                     .error(R.drawable.image_not_available)
                     .into(stepThumbIV);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // we need to save the video current position state if the video is playing ready state
+        if (mExoPlayer.getPlaybackState() == ExoPlayer.STATE_READY) {
+            long currentPos = mExoPlayer.getCurrentPosition();
+            outState.putLong(KEY_VIDEO_POSITION, currentPos);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // restore the video position after any configuration change
+        if (savedInstanceState != null) {
+            long restorePos = savedInstanceState.getLong(KEY_VIDEO_POSITION, 0);
+            if (mExoPlayer != null && mExoPlayer.getPlayWhenReady()) {
+                mExoPlayer.seekTo(restorePos);
+            }
         }
     }
 

@@ -37,11 +37,14 @@ public class StepDetailsActivity extends AppCompatActivity {
 
         Step step = getIntent().getParcelableExtra(Constants.KEY_STEP_DETAILS);
 
-        StepDetailsFragment stepDetailsFragment = StepDetailsFragment.newInstance(step);
+        // Create new fragment if the Activity is created for first time
+        if (savedInstanceState == null) {
+            StepDetailsFragment stepDetailsFragment = StepDetailsFragment.newInstance(step);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.stepDetailsPlaceholder, stepDetailsFragment)
-                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.stepDetailsPlaceholder, stepDetailsFragment)
+                    .commit();
 
+        }
     }
 }
