@@ -34,23 +34,18 @@ public class RecipeMasterActivity extends AppCompatActivity implements StepsFrag
         IngredientsFragment ingredientsFragment = (IngredientsFragment) getSupportFragmentManager().findFragmentById(R.id.ingredientsFragment);
         ingredientsFragment.setIngredientArrayList((ArrayList<Ingredient>) recipe.getIngredientList());
 
-
         StepsFragment stepsFragment = (StepsFragment) getSupportFragmentManager().findFragmentById(R.id.stepsFragment);
         stepsFragment.setStepArrayList((ArrayList<Step>) recipe.getStepList());
 
-        if (findViewById(R.id.layoutTowPane) != null) {
-            isTwoPane = true;
-
+        // detect if app is run on a tablet .. so add the details fragment to the same activity
+        isTwoPane = getResources().getBoolean(R.bool.isTablet);
+        if (isTwoPane) {
             StepDetailsFragment stepDetailsFragment = StepDetailsFragment.newInstance(recipe.getStepList().get(0));
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.stepDetailsPlaceholder, stepDetailsFragment)
                     .commit();
         }
-        else {
-            isTwoPane =false;
-        }
-
     }
 
     @Override
