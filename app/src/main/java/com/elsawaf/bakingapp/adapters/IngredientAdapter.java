@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.RecipeViewHolder> {
+public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder> {
 
     private List<Ingredient> ingredientList;
     private Context context;
@@ -28,15 +28,15 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Re
 
     @NonNull
     @Override
-    public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View myView = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.ingredient_list_item, parent, false);
-        RecipeViewHolder viewHolder = new RecipeViewHolder(myView);
+        IngredientViewHolder viewHolder = new IngredientViewHolder(myView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         Ingredient ingredient = ingredientList.get(position);
         holder.ingredientNameTV.setText(ingredient.getName());
         holder.ingredientQuantityTV.setText("" + ingredient.getQuantity());
@@ -49,11 +49,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Re
     }
 
     public void setIngredientList(List<Ingredient> ingredientList) {
+        if (ingredientList == null) return;
         this.ingredientList = ingredientList;
         notifyDataSetChanged();
     }
 
-    public class RecipeViewHolder extends RecyclerView.ViewHolder {
+    public class IngredientViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tvIngredientName)
         TextView ingredientNameTV;
@@ -62,7 +63,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Re
         @BindView(R.id.tvIngredientMeasure)
         TextView ingredientMeasureTV;
 
-        public RecipeViewHolder(View itemView) {
+        public IngredientViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

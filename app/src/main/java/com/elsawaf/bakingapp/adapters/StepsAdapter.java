@@ -54,6 +54,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.RecipeViewHo
     }
 
     public void setStepList(List<Step> stepList) {
+        if (stepList == null) return;
         this.stepList = stepList;
         notifyDataSetChanged();
     }

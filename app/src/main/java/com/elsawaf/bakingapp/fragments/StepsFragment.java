@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StepsFragment extends Fragment implements StepsAdapter.OnStepClickListener {
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerViewSteps)
     RecyclerView recyclerView;
     OnStepClickFromFragment mCallback;
 
