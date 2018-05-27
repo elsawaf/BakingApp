@@ -54,7 +54,8 @@
         </receiver>
 
         <activity android:name=".activities.ChooseRecipeActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:excludeFromRecents="true"/>
 
         <service android:name=".ListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
