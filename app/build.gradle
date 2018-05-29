@@ -56,5 +56,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.android.exoplayer:exoplayer:r2.2.0'
 
-    implementation 'com.github.satyan:sugar:1.4'
+    // exclude the conflicted modules
+    implementation ('com.github.satyan:sugar:1.4'){
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }
