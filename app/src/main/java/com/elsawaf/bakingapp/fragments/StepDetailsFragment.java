@@ -16,7 +16,6 @@ import com.elsawaf.bakingapp.R;
 import com.elsawaf.bakingapp.model.Step;
 import com.elsawaf.bakingapp.network.Constants;
 import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -105,13 +104,12 @@ public class StepDetailsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        // we need to save the video current position state if the video is playing ready state
-        if (mExoPlayer.getPlaybackState() == ExoPlayer.STATE_READY) {
-            long currentPos = mExoPlayer.getCurrentPosition();
-            boolean isPlayWhenReady = mExoPlayer.getPlayWhenReady();
-            outState.putLong(KEY_VIDEO_POSITION, currentPos);
-            outState.putBoolean(KEY_VIDEO_PLAYING, isPlayWhenReady);
-        }
+        // we need to save the video current position state and the video playing state
+        long currentPos = mExoPlayer.getCurrentPosition();
+        boolean isPlayWhenReady = mExoPlayer.getPlayWhenReady();
+        outState.putLong(KEY_VIDEO_POSITION, currentPos);
+        outState.putBoolean(KEY_VIDEO_PLAYING, isPlayWhenReady);
+
     }
 
     @Override

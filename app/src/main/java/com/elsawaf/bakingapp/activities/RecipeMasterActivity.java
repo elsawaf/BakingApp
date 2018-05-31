@@ -1,12 +1,12 @@
 package com.elsawaf.bakingapp.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.elsawaf.bakingapp.fragments.IngredientsFragment;
 import com.elsawaf.bakingapp.R;
+import com.elsawaf.bakingapp.fragments.IngredientsFragment;
 import com.elsawaf.bakingapp.fragments.StepDetailsFragment;
 import com.elsawaf.bakingapp.fragments.StepsFragment;
 import com.elsawaf.bakingapp.model.Ingredient;
@@ -39,7 +39,9 @@ public class RecipeMasterActivity extends AppCompatActivity implements StepsFrag
 
         // detect if app is run on a tablet .. so add the details fragment to the same activity
         isTwoPane = getResources().getBoolean(R.bool.isTablet);
-        if (isTwoPane) {
+        // check savedInstanceState to create and add the fragment only when Activity is created for first time
+        // It's required to handle the Fragment state restoring
+        if (isTwoPane && savedInstanceState == null) {
             StepDetailsFragment stepDetailsFragment = StepDetailsFragment.newInstance(recipe.getStepList().get(0));
 
             getSupportFragmentManager().beginTransaction()
